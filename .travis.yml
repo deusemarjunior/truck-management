@@ -11,3 +11,5 @@ script:
 - ./mvnw clean install -B
 - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=deusemarjunior_truck-management
 
+before_install:
+- chmod +x mvnw
