@@ -4,7 +4,7 @@ jdk: Oraclejdk11
 
 addons:
   sonarcloud:
-    organization: "blackvagas"
+    organization: "clean-automation"
     token: $SONAR_TOKEN
 
 script:
