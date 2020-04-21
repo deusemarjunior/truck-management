@@ -8,9 +8,13 @@ import com.truck.deusemar.domain.enums.GenderEnum;
 import com.truck.deusemar.domain.enums.TruckTypeEnum;
 
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "drivers")
 @ApiModel
 public class Driver {
@@ -28,23 +32,5 @@ public class Driver {
 	private boolean hasTruck;
 
     private TruckTypeEnum truckType;
-	
 
-	public Driver(String id, String nome, Integer age, GenderEnum gender, boolean hasTruck, TruckTypeEnum truckType) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.age = age;
-		this.gender = gender;
-		this.hasTruck = hasTruck;
-		this.truckType = truckType;
-	}
-
-
-
-	public Driver() {
-	}
-	
-	
-	
 }
