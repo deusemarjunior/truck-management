@@ -21,6 +21,8 @@ jobs:
         api-key: 
           secure: $HEROKU_API_KEY
         app: truck-management
+        on:
+          branch: develop
 
 before_install:
 - chmod +x mvnw
