@@ -24,44 +24,39 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/drivers")
-@Api(value="Maintenance of drivers")
+@Api(value = "Maintenance of drivers")
 public class DriverController {
-	
+
 	@Autowired
 	private DriverRepository driverRepository;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getId(@PathVariable(name="id", required=true) String id) {
+	public ResponseEntity<?> getId(@PathVariable(value = "id", required = true) String id) {
 		Optional<Driver> driver = driverRepository.findById(id);
-		if(driver.isPresent()) 
-			return	ResponseEntity.ok(driver.get());
+		if (driver.isPresent())
+			return ResponseEntity.ok(driver.get());
 		else
-			return	ResponseEntity.noContent().build();
+			return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping
 	public ResponseEntity<?> list() {
-		
-		return this.driverRepository.count() == 0L 
-				? ResponseEntity.noContent().build()
+
+		return this.driverRepository.count() == 0L ? ResponseEntity.noContent().build()
 				: ResponseEntity.ok(this.driverRepository.findAll());
-		
-		
+
 	}
-	
+
 	@GetMapping("/owners")
 	@ApiOperation("List of drivers owners of trucks")
 	public ResponseEntity<?> listDriverOwnerTruck() {
 		Driver example = new Driver();
 		example.setHasTruck(true);
 		List<Driver> drivers = driverRepository.findAll(Example.of(example));
-		return drivers == null 
-				? ResponseEntity.noContent().build()
-				: ResponseEntity.ok(drivers);
-		
-		
+		return drivers == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(drivers);
+
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Driver driver) {
 		try {
@@ -71,7 +66,7 @@ public class DriverController {
 			return ResponseEntity.badRequest().body("Errors");
 		}
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Driver driver) {
 		try {
@@ -81,11 +76,12 @@ public class DriverController {
 			return ResponseEntity.badRequest().body("Errors");
 		}
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) String id) {
+	public ResponseEntity<?> delete(@PathVariable(value = "id", required = true) String id) {
 		try {
 			Optional<Driver> drive = driverRepository.findById(id);
-			if(drive.isPresent()) {
+			if (drive.isPresent()) {
 				this.driverRepository.delete(drive.get());
 				return ResponseEntity.status(HttpStatus.OK).body("");
 			}

@@ -21,31 +21,29 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/places")
-@Api(value="Maintenance of places 'origin' and 'destinations'")
+@Api(value = "Maintenance of places 'origin' and 'destinations'")
 public class PlaceController {
-	
+
 	@Autowired
 	private PlaceRepository placeRepository;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getId(@PathVariable(name="id", required=true) String id) {
+	public ResponseEntity<?> getId(@PathVariable(value = "id", required = true) String id) {
 		Optional<Place> place = placeRepository.findById(id);
-		if(place.isPresent()) 
-			return	ResponseEntity.ok(place.get());
+		if (place.isPresent())
+			return ResponseEntity.ok(place.get());
 		else
-			return	ResponseEntity.noContent().build();
+			return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping
 	public ResponseEntity<?> list() {
-		
-		return this.placeRepository.count() == 0L 
-				? ResponseEntity.noContent().build()
+
+		return this.placeRepository.count() == 0L ? ResponseEntity.noContent().build()
 				: ResponseEntity.ok(this.placeRepository.findAll());
-		
-		
+
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Place place) {
 		try {
@@ -55,7 +53,7 @@ public class PlaceController {
 			return ResponseEntity.badRequest().body("Errors");
 		}
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Place place) {
 		try {
@@ -65,11 +63,12 @@ public class PlaceController {
 			return ResponseEntity.badRequest().body("Errors");
 		}
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) String id) {
+	public ResponseEntity<?> delete(@PathVariable(value = "id", required = true) String id) {
 		try {
 			Optional<Place> place = placeRepository.findById(id);
-			if(place.isPresent()) {
+			if (place.isPresent()) {
 				this.placeRepository.delete(place.get());
 				return ResponseEntity.status(HttpStatus.OK).body("");
 			}
