@@ -1,5 +1,8 @@
 package com.truck.deusemar.entrypoint.mapper;
 
+import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertCoreToDto;
+import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoToCore;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,11 +15,10 @@ public class DriverEntryPointMapperTest {
 	@Test
 	public void testConvertDtotoCore() {
 		// given
-		var mapper = new DriverEntryPointMapper();
 		DriverDTO driverDto = DriverFactory.generateRandomDTO();
 
 		// when
-		Driver driverCore = mapper.convertDtoToCore(driverDto);
+		Driver driverCore = convertDtoToCore(driverDto);
 
 		// then
 		Assert.assertEquals(driverCore.toString(), driverDto.toString());
@@ -24,11 +26,10 @@ public class DriverEntryPointMapperTest {
 
 	public void testConvertCoretoDto() {
 		// given
-		var mapper = new DriverEntryPointMapper();
 		Driver driverCore = DriverFactory.generateRandomCore();
 
 		// when
-		DriverDTO driverDto = mapper.convertCoreToDto(driverCore);
+		DriverDTO driverDto = convertCoreToDto(driverCore);
 
 		// then
 		Assert.assertEquals(driverDto.toString(), driverCore.toString());
