@@ -1,4 +1,4 @@
-package com.truck.deusemar.controller;
+package com.truck.deusemar.entrypoint;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,18 +17,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.truck.deusemar.domain.Driver;
+import com.truck.deusemar.entrypoint.entity.DriverDTO;
 import com.truck.deusemar.repository.DriverRepository;
+import com.truck.deusemar.usecase.DriverSaveUseCase;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/drivers")
+@RequestMapping("/api/v1")
 @Api(value = "Maintenance of drivers")
 public class DriverController {
 
-	@Autowired
 	private DriverRepository driverRepository;
+	private DriverSaveUseCase useCase;
+
+	@Autowired
+	public DriverController(DriverRepository driverRepository, DriverSaveUseCase useCase) {
+		this.driverRepository = driverRepository;
+		this.useCase = useCase;
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getId(@PathVariable(value = "id", required = true) String id) {
@@ -57,14 +65,10 @@ public class DriverController {
 
 	}
 
-	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Driver driver) {
-		try {
-			this.driverRepository.save(driver);
-			return ResponseEntity.status(HttpStatus.CREATED).body(driver);
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Errors");
-		}
+	@PostMapping("/drivers")
+	public ResponseEntity<DriverDTO> create(@RequestBody DriverDTO driver) {
+		this.driverRepository.save(driver);
+		return ResponseEntity.status(HttpStatus.CREATED).body(driver);
 	}
 
 	@PutMapping

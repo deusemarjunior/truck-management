@@ -1,4 +1,4 @@
-package com.truck.deusemar.controller;
+package com.truck.deusemar.entrypoint;
 
 import java.util.Optional;
 
