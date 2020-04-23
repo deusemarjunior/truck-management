@@ -59,7 +59,7 @@ public class DriverController {
 	@ApiOperation("List of drivers owners of trucks")
 	public ResponseEntity<?> listDriverOwnerTruck() {
 		Driver example = new Driver();
-		example.setHasTruck(true);
+		//example.setHasTruck(true);
 		List<Driver> drivers = driverRepository.findAll(Example.of(example));
 		return drivers == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(drivers);
 
@@ -67,7 +67,7 @@ public class DriverController {
 
 	@PostMapping("/drivers")
 	public ResponseEntity<DriverDTO> create(@RequestBody DriverDTO driver) {
-		this.driverRepository.save(driver);
+		//this.driverRepository.save(driver);
 		return ResponseEntity.status(HttpStatus.CREATED).body(driver);
 	}
 
