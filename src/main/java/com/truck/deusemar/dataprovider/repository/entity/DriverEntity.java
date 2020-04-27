@@ -1,6 +1,7 @@
 package com.truck.deusemar.dataprovider.repository.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 import com.truck.deusemar.domain.enums.GenderEnum;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Document(collection = "driver")
 public class DriverEntity {
 
 	@Id
