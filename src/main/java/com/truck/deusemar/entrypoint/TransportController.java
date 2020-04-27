@@ -1,4 +1,4 @@
-package com.truck.deusemar.controller;
+package com.truck.deusemar.entrypoint;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.truck.deusemar.domain.Transport;
 import com.truck.deusemar.domain.enums.PeriodEnum;
 import com.truck.deusemar.repository.TransportRepository;
-import com.truck.deusemar.service.TransportService;
+import com.truck.deusemar.usecase.TransportService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

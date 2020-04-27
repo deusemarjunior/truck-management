@@ -1,4 +1,4 @@
-package com.truck.deusemar.service;
+package com.truck.deusemar.usecase;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
