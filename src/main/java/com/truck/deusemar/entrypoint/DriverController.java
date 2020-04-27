@@ -1,7 +1,7 @@
 package com.truck.deusemar.entrypoint;
 
-import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertCoreToDto;
-import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoToCore;
+import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertCoreToDtoResponse;
+import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoRequestToCore;
 
 import java.util.List;
 
@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.truck.deusemar.domain.Driver;
-import com.truck.deusemar.entrypoint.entity.DriverDTO;
+import com.truck.deusemar.entrypoint.entity.DriverRequestDTO;
+import com.truck.deusemar.entrypoint.entity.DriverResponseDTO;
 import com.truck.deusemar.repository.DriverRepository;
 import com.truck.deusemar.usecase.DriverSaveUseCase;
 
@@ -68,9 +69,9 @@ public class DriverController {
 	}
 
 	@PostMapping("/drivers")
-	public ResponseEntity<DriverDTO> create(@RequestBody DriverDTO driverDTO) {
-		var driverCore = this.useCase.saveDriver(convertDtoToCore(driverDTO));
-		return ResponseEntity.status(HttpStatus.CREATED).body(convertCoreToDto(driverCore));
+	public ResponseEntity<DriverResponseDTO> create(@RequestBody DriverRequestDTO driverDTO) {
+		var driverCore = this.useCase.saveDriver(convertDtoRequestToCore(driverDTO));
+		return ResponseEntity.status(HttpStatus.CREATED).body(convertCoreToDtoResponse(driverCore));
 	}
 
 	@PutMapping

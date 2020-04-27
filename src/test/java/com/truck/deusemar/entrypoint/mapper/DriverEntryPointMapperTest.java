@@ -1,35 +1,38 @@
 package com.truck.deusemar.entrypoint.mapper;
 
-import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertCoreToDto;
-import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoToCore;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.truck.deusemar.entrypoint.entity.DriverDTO;
+import com.truck.deusemar.entrypoint.entity.DriverRequestDTO;
+import com.truck.deusemar.entrypoint.entity.DriverResponseDTO;
 import com.truck.deusemar.factory.DriverFactory;
 import com.truck.deusemar.usecase.entity.Driver;
 
 public class DriverEntryPointMapperTest {
 
 	@Test
-	public void testConvertDtotoCore() {
+	public void testConvertDtoRequesttoCore() {
 		// given
-		DriverDTO driverDto = DriverFactory.generateRandomDTO();
+		DriverRequestDTO driverDto = DriverFactory.generateRandomDTORequest();
 
 		// when
-		Driver driverCore = convertDtoToCore(driverDto);
+		Driver driverCore = DriverEntryPointMapper.convertDtoRequestToCore(driverDto);
 
 		// then
-		Assert.assertEquals(driverCore.toString(), driverDto.toString());
+		Assert.assertEquals(driverCore.getAge(), driverDto.getAge());
+		Assert.assertEquals(driverCore.getNome(), driverDto.getNome());
+		Assert.assertEquals(driverCore.getGender(), driverDto.getGender());
+		Assert.assertEquals(driverCore.getTruckType(), driverDto.getTruckType());
+		Assert.assertEquals(driverCore.isHasTruck(), driverDto.isHasTruck());
+
 	}
 
-	public void testConvertCoretoDto() {
+	public void testConvertCoretoDtoResponse() {
 		// given
 		Driver driverCore = DriverFactory.generateRandomCore();
 
 		// when
-		DriverDTO driverDto = convertCoreToDto(driverCore);
+		DriverResponseDTO driverDto = DriverEntryPointMapper.convertCoreToDtoResponse(driverCore);
 
 		// then
 		Assert.assertEquals(driverDto.toString(), driverCore.toString());

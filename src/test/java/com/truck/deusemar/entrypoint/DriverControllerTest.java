@@ -1,7 +1,7 @@
 package com.truck.deusemar.entrypoint;
 
-import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoToCore;
-import static com.truck.deusemar.factory.DriverFactory.generateRandomDTO;
+import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoRequestToCore;
+import static com.truck.deusemar.factory.DriverFactory.generateRandomDTORequest;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.truck.deusemar.entrypoint.entity.DriverDTO;
+import com.truck.deusemar.entrypoint.entity.DriverRequestDTO;
 import com.truck.deusemar.repository.DriverRepository;
 import com.truck.deusemar.usecase.DriverSaveUseCase;
 import com.truck.deusemar.usecase.entity.Driver;
@@ -43,8 +43,8 @@ public class DriverControllerTest {
 	@Test
 	public void saveTest() {
 		// given
-		DriverDTO driverDto = generateRandomDTO();
-		var driverCore = convertDtoToCore(driverDto);
+		DriverRequestDTO driverDto = generateRandomDTORequest();
+		var driverCore = convertDtoRequestToCore(driverDto);
 
 		when(useCase.saveDriver(Mockito.any(Driver.class))).thenReturn(driverCore);
 

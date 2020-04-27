@@ -1,14 +1,12 @@
-package com.truck.deusemar.dataprovider.repository.entity;
+package com.truck.deusemar.entrypoint.entity;
 
 import java.io.Serializable;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 import com.truck.deusemar.domain.enums.GenderEnum;
 import com.truck.deusemar.domain.enums.TruckTypeEnum;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,12 +16,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "driver")
-public class DriverEntity implements Serializable {
+@ApiModel
+public class DriverResponseDTO implements Serializable {
 
-	private static final long serialVersionUID = 1286520732454737920L;
+	private static final long serialVersionUID = 1L;
 
-	@Id
 	private String id;
 
 	@NonNull

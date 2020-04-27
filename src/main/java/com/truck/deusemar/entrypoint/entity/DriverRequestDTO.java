@@ -2,9 +2,6 @@ package com.truck.deusemar.entrypoint.entity;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.mongodb.lang.NonNull;
 import com.truck.deusemar.domain.enums.GenderEnum;
 import com.truck.deusemar.domain.enums.TruckTypeEnum;
@@ -19,14 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "drivers")
 @ApiModel
-public class DriverDTO implements Serializable {
+public class DriverRequestDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	private String id;
 
 	@NonNull
 	private String nome;
@@ -38,11 +31,5 @@ public class DriverDTO implements Serializable {
 	private boolean hasTruck;
 
 	private TruckTypeEnum truckType;
-
-	@Override
-	public String toString() {
-		return "[id=" + id + ", nome=" + nome + ", age=" + age + ", gender=" + gender + ", hasTruck=" + hasTruck
-				+ ", truckType=" + truckType + "]";
-	}
 
 }

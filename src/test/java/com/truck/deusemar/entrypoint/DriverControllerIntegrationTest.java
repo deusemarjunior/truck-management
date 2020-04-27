@@ -1,7 +1,6 @@
 package com.truck.deusemar.entrypoint;
 
-import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoToCore;
-import static com.truck.deusemar.factory.DriverFactory.generateRandomDTO;
+import static com.truck.deusemar.entrypoint.mapper.DriverEntryPointMapper.convertDtoRequestToCore;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -18,7 +17,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.truck.deusemar.configuration.ConfigurationIntegrationTest;
-import com.truck.deusemar.entrypoint.entity.DriverDTO;
+import com.truck.deusemar.entrypoint.entity.DriverRequestDTO;
+import com.truck.deusemar.factory.DriverFactory;
 import com.truck.deusemar.repository.DriverRepository;
 import com.truck.deusemar.usecase.DriverSaveUseCase;
 import com.truck.deusemar.usecase.entity.Driver;
@@ -45,10 +45,10 @@ public class DriverControllerIntegrationTest extends ConfigurationIntegrationTes
 	public void testSaveEndPoint() throws Exception {
 
 		// given
-		DriverDTO driverDto = generateRandomDTO();
-		String driverJson = new ObjectMapper().writeValueAsString(driverDto);
+		DriverRequestDTO driverRequest = DriverFactory.generateRandomDTORequest();
+		String driverJson = new ObjectMapper().writeValueAsString(driverRequest);
 
-		when(useCase.saveDriver(Mockito.any(Driver.class))).thenReturn(convertDtoToCore(driverDto));
+		when(useCase.saveDriver(Mockito.any(Driver.class))).thenReturn(convertDtoRequestToCore(driverRequest));
 
 		// when
 		ResultActions dataReturn = this.mockMvc.perform(
